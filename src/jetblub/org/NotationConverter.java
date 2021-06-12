@@ -8,7 +8,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NotationConverter {
+    //private field for more data encapsulation
+
     private String romanNotation;
+
+    //private methods for accessing the field, so that access is only inside
+    // the class and no one from outside can make changes
 
     private String getRomanNotation() {
         return romanNotation;
@@ -17,6 +22,12 @@ public class NotationConverter {
     private void setRomanNotation(String romanNotation) {
         this.romanNotation = romanNotation;
     }
+
+    //Roman to Arabic conversion method
+    //this is the only public method of the class, all other methods are auxiliary,
+    // they are used to separate logic,
+    // improve the readability of the code and are needed only for the correct operation of this method,
+    // therefore they are all private
 
     public int toArabic(String romanNotation) throws InvalidAttributeValueException {
         if (romanNotation == null) {
@@ -37,10 +48,14 @@ public class NotationConverter {
         }
     }
 
+    //a method where we get an array of strings from a string, for further work with data
+
     private static String[] getStringArray(String romanNotation){
         String[] letters = romanNotation.split("(?<=.)");
         return letters;
     }
+
+    //here we get a list with valid roman numbers
 
     private static List<String> getListNumbers(String[] letters){
         List<String> stringList = new ArrayList<>();
@@ -81,6 +96,8 @@ public class NotationConverter {
         return stringList;
     }
 
+    //here we get a hashmap with possible values of numbers
+
     private static HashMap<String, Integer> getMap() {
         HashMap<String, Integer> romanMap = new HashMap<>();
         romanMap.put("I", 1);
@@ -99,6 +116,8 @@ public class NotationConverter {
         return romanMap;
     }
 
+    //here we get an arabic number from roman
+
     private static int getResult(List<String> stringList, HashMap<String, Integer> romanMap) {
         int result = 0;
         for (int i = 0; i < stringList.size(); i++) {
@@ -106,6 +125,8 @@ public class NotationConverter {
         }
         return result;
     }
+
+    //  method for checking the validity of an incoming string
 
     private static boolean isValid(String romanNotation) {
         boolean check;
